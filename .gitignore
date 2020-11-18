@@ -1,0 +1,11 @@
+*.csv
+__pycache__
+checkpoints/
+data/
+eda/
+logs/
+.ipynb_checkpoints/
+downloaded/
+*.png
+captioning/
+distilbert/

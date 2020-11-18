@@ -1,0 +1,50 @@
+password:
+EWryfbZyNviilcDF
+
+maybe a simple logistic regr or a boosted forest would do the job
+
+Create a list of caption for the images:
+cheap one: use inception v3 and caption = the first class
+
+eval the results of distilbert fine tuning with the test set
+get a acc score but also AUC ROC
+
+Model 2.
+
+image -> NN embed: inception v3       -> features | CONCAT -> classficiation layer: dense -> label
+text  -> transf embed: finetuned bert ->     code |
+
+Training:
+1. fine tune bert unsupervised OR use as is
+2. compute features and code at once
+3. train classification layer
+
+
+improvements:
+add sentiment of the text as a feature
+
+*** abandoned ***
+
+Model 1:
+image -> inception v3 (or something else) -> features (dim=2048) -> Glove+RNN (or transformer) -> caption ->| text [SEP] caption -> distilbert (tranformer) -> classification layer -> label
+text  ----------------------------------------------------------------------------------------------->|
+
+
+Training:
+1. captioning:
+with COCO caption validation set:
+- compute all the feature in one go
+- compute the embedding of the captions with glove
+- using the feature vectors, train the RNN
+2.
+classification
+- compute all the captions for the train data
+- prepare pipeline for the transformer model
+- fine tune (distilbert) with classification layer
+
+
+
+improvements:
+* use better captioning model: finetuned bert/distilbert instead of Glove+RNN
+* bigger trnasformer model
+
